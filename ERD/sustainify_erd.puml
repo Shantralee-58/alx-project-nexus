@@ -1,0 +1,113 @@
+@startuml Sustainify_ERD
+' -----------------------------
+' Sustainify ERD — Professional Version with Crow’s Foot
+' -----------------------------
+skinparam linetype ortho
+hide circle
+skinparam classAttributeIconSize 0
+
+' Entities
+class User {
+  +id : UUID <<PK>>
+  +email : varchar
+  +username : varchar
+  +password_hash : varchar
+  +is_active : boolean
+  +is_staff : boolean
+  +role : varchar
+  +created_at : timestamptz
+}
+
+class Store {
+  +id : UUID <<PK>>
+  +owner_id : UUID <<FK>>
+  +name : varchar
+  +description : text
+  +location_lat : decimal
+  +location_lng : decimal
+  +created_at : timestamptz
+}
+
+class Product {
+  +id : UUID <<PK>>
+  +store_id : UUID <<FK>>
+  +name : varchar
+  +sku : varchar
+  +description : text
+  +price_cents : integer
+  +quantity : integer
+  +is_surplus : boolean
+  +expiry_date : date
+  +eco_category : varchar
+  +created_at : timestamptz
+}
+
+class Category {
+  +id : UUID <<PK>>
+  +name : varchar
+}
+
+class ProductCategory {
+  +id : UUID <<PK>>
+  +product_id : UUID <<FK>>
+  +category_id : UUID <<FK>>
+}
+
+class Order {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +store_id : UUID <<FK>>
+  +total_cents : integer
+  +status : varchar
+  +created_at : timestamptz
+}
+
+class OrderItem {
+  +id : UUID <<PK>>
+  +order_id : UUID <<FK>>
+  +product_id : UUID <<FK>>
+  +price_cents : integer
+  +quantity : integer
+}
+
+class EcoScore {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +score : integer
+  +details : JSON
+}
+
+class SwapListing {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +product_id : UUID <<FK>>
+  +desired_items : text
+  +status : varchar
+  +created_at : timestamptz
+}
+
+class Notification {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +type : varchar
+  +payload : JSON
+  +read : boolean
+  +created_at : timestamptz
+}
+
+' Relationships with Crow's Foot Notation
+User "1" -- "0..*" Store : owns
+Store "1" -- "0..*" Product : offers
+Product "1" -- "0..*" ProductCategory : classified_as
+Category "1" -- "0..*" ProductCategory : includes
+User "1" -- "0..*" Order : places
+Store "1" -- "0..*" Order : receives
+Order "1" -- "0..*" OrderItem : contains
+Product "1" -- "0..*" OrderItem : sold_as
+User "1" -- "0..*" EcoScore : has
+User "1" -- "0..*" SwapListing : creates
+Product "1" -- "0..*" SwapListing : references
+User "1" -- "0..*" Notification : receives
+
+@enduml
+
