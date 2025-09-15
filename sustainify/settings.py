@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'sustainify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('SUSTAINIFY_DB_NAME'),
-        'USER': os.getenv('SUSTAINIFY_DB_USER'),
-        'PASSWORD': os.getenv('SUSTAINIFY_DB_PASSWORD'),
-        'HOST': os.getenv('SUSTAINIFY_DB_HOST'),
-        'PORT': os.getenv('SUSTAINIFY_DB_PORT'),
+        'NAME': 'sustainify_db',
+        'USER': 'sustainify_user',
+        'PASSWORD': 'sustainify123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
