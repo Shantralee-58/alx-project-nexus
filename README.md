@@ -1,13 +1,22 @@
-Sustainify 🌱
-Developer: Idah Lindiwe Khumalo
-Location: City of Johannesburg, Gauteng, South Africa
-Contact: +27671114441 / +27780542966 / +27768338122
-Email: lindiwekhumalo833@gmail.com
-LinkedIn: https://www.linkedin.com/in/idah-khumalo-765778159
-GitHub: https://github.com/Shantralee-58
-Project Description
+# Sustainify 🌱
+
+**Developer:** Idah Lindiwe Khumalo  
+**Location:** City of Johannesburg, Gauteng, South Africa  
+**Contact:** +27671114441 / +27780542966 / +27768338122  
+**Email:** lindiwekhumalo833@gmail.com  
+**LinkedIn:** [https://www.linkedin.com/in/idah-khumalo-765778159](https://www.linkedin.com/in/idah-khumalo-765778159)  
+**GitHub:** [https://github.com/Shantralee-58](https://github.com/Shantralee-58)  
+
+---
+
+## Project Description
+
 Sustainify is an eco-conscious e-commerce and service platform designed to connect users with sustainable products and services. Users can buy eco-friendly products, track eco-scores, create swap listings, and receive notifications about relevant items. Sustainify emphasizes sustainability, user empowerment, and ethical consumption.
-Project Structure
+
+---
+
+## Project Structure
+
 alx-project-nexus/
 ├── sustainify/                # Django project settings
 │   ├── __init__.py
@@ -44,7 +53,9 @@ alx-project-nexus/
 ├── manage.py
 ├── requirements.txt
 └── README.md
+
 ERD Diagram
+
 @startuml Sustainify_ERD
 skinparam linetype ortho
 hide circle
@@ -150,31 +161,45 @@ User "1" -- "0..*" EcoScore : has
 User "1" -- "0..*" SwapListing : creates
 Product "1" -- "0..*" SwapListing : references
 User "1" -- "0..*" Notification : receives
+
 @enduml
+
 Tech Stack
 Backend: Django 5.2.6 (Python 3.12)
-Frontend: HTML, CSS, JavaScript (colors: Green #2E8B57, Black, Creme White)
-Database: SQLite (dev) / PostgreSQL (prod)
-Authentication: Custom User Model, hashed passwords, CSRF protection
-Tools: Git, PlantUML, venv
-Features
-- User registration & login
-- CRUD for products, stores, orders
-- Category-based product classification
-- Order & order item tracking
-- EcoScore tracking
-- Swap listings for products
-- Notifications system
-- Responsive UI
-Setup Instructions
-Clone the repo, create and activate virtual environment, install dependencies, apply migrations, create superuser (optional), run development server, and open in browser:
 
+Frontend: HTML, CSS, JavaScript (colors: Green #2E8B57, Black, Creme White)
+
+Database: SQLite (dev) / PostgreSQL (prod)
+
+Authentication: Custom User Model, hashed passwords, CSRF protection
+
+Tools: Git, PlantUML, venv
+
+Features
+User registration & login
+
+CRUD for products, stores, orders
+
+Category-based product classification
+
+Order & order item tracking
+
+EcoScore tracking
+
+Swap listings for products
+
+Notifications system
+
+Responsive UI
+
+Setup Instructions
 git clone https://github.com/Shantralee-58/alx-project-nexus.git
 cd alx-project-nexus
 python -m venv venv
-source venv/Scripts/activate   # Windows
-# OR
-source venv/bin/activate       # macOS/Linux
+# Windows
+source venv/Scripts/activate
+# macOS/Linux
+# source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser  # optional
