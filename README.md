@@ -55,7 +55,9 @@ alx-project-nexus/
 ├── requirements.txt
 └── README.md
 
-ERD Diagram
+--------
+```
+## ERD Diagram
 
 @startuml Sustainify_ERD
 skinparam linetype ortho
@@ -150,6 +152,7 @@ class Notification {
   +created_at : timestamptz
 }
 
+
 User "1" -- "0..*" Store : owns
 Store "1" -- "0..*" Product : offers
 Product "1" -- "0..*" ProductCategory : classified_as
@@ -165,10 +168,13 @@ User "1" -- "0..*" Notification : receives
 
 @enduml
 
-Tech Stack
+-----
+
+## Tech Stack
+
 Backend: Django 5.2.6 (Python 3.12)
 
-Frontend: HTML, CSS, JavaScript (colors: Green #2E8B57, Black, Creme White)
+Frontend: HTML, CSS, JavaScript 
 
 Database: SQLite (dev) / PostgreSQL (prod)
 
@@ -176,7 +182,8 @@ Authentication: Custom User Model, hashed passwords, CSRF protection
 
 Tools: Git, PlantUML, venv
 
-Features
+## Features
+
 User registration & login
 
 CRUD for products, stores, orders
@@ -193,14 +200,18 @@ Notifications system
 
 Responsive UI
 
-Setup Instructions
+## Setup Instructions
+
 git clone https://github.com/Shantralee-58/alx-project-nexus.git
 cd alx-project-nexus
 python -m venv venv
+
 # Windows
 source venv/Scripts/activate
+
 # macOS/Linux
-# source venv/bin/activate
+source venv/bin/activate
+
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser  # optional
