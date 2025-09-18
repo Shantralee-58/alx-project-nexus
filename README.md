@@ -17,6 +17,7 @@ Sustainify is an eco-conscious e-commerce and service platform designed to conne
 
 ## Project Structure
 
+```
 alx-project-nexus/
 ├── sustainify/                # Django project settings
 │   ├── __init__.py
