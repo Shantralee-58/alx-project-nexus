@@ -1,23 +1,13 @@
-# Sustainify 🌱
-
-**Developer:** Idah Lindiwe Khumalo  
-**Location:** City of Johannesburg, Gauteng, South Africa  
-**Contact:** +27671114441 / +27780542966 / +27768338122  
-**Email:** lindiwekhumalo833@gmail.com  
-**LinkedIn:** [https://www.linkedin.com/in/idah-khumalo-765778159](https://www.linkedin.com/in/idah-khumalo-765778159)  
-**GitHub:** [https://github.com/Shantralee-58](https://github.com/Shantralee-58)  
-
----
-
-## Project Description
-
+Sustainify 🌱
+Developer: Idah Lindiwe Khumalo
+Location: City of Johannesburg, Gauteng, South Africa
+Contact: +27671114441 / +27780542966 / +27768338122
+Email: lindiwekhumalo833@gmail.com
+LinkedIn: https://www.linkedin.com/in/idah-khumalo-765778159
+GitHub: https://github.com/Shantralee-58
+Project Description
 Sustainify is an eco-conscious e-commerce and service platform designed to connect users with sustainable products and services. Users can buy eco-friendly products, track eco-scores, create swap listings, and receive notifications about relevant items. Sustainify emphasizes sustainability, user empowerment, and ethical consumption.
-
----
-
-## Project Structure
-
-```text
+Project Structure
 alx-project-nexus/
 ├── sustainify/                # Django project settings
 │   ├── __init__.py
@@ -25,7 +15,6 @@ alx-project-nexus/
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── asgi.py
-│
 ├── products/                  # Product management app
 │   ├── migrations/
 │   ├── __init__.py
@@ -34,7 +23,6 @@ alx-project-nexus/
 │   ├── models.py
 │   ├── tests.py
 │   └── views.py
-│
 ├── users/                     # User management app
 │   ├── migrations/
 │   ├── __init__.py
@@ -44,7 +32,6 @@ alx-project-nexus/
 │   ├── models.py
 │   ├── urls.py
 │   └── views.py
-│
 ├── orders/                    # Order management app
 │   ├── migrations/
 │   ├── __init__.py
@@ -53,16 +40,11 @@ alx-project-nexus/
 │   ├── models.py
 │   ├── tests.py
 │   └── views.py
-│
 ├── ERD/                       # PlantUML ERD files
 ├── manage.py
 ├── requirements.txt
 └── README.md
 ERD Diagram
-PlantUML snippet for GitHub rendering:
-
-plantuml
-Copy code
 @startuml Sustainify_ERD
 skinparam linetype ortho
 hide circle
@@ -168,77 +150,34 @@ User "1" -- "0..*" EcoScore : has
 User "1" -- "0..*" SwapListing : creates
 Product "1" -- "0..*" SwapListing : references
 User "1" -- "0..*" Notification : receives
-
 @enduml
-You can render this ERD on GitHub using a PlantUML plugin or online PlantUML server.
-
 Tech Stack
 Backend: Django 5.2.6 (Python 3.12)
-
 Frontend: HTML, CSS, JavaScript (colors: Green #2E8B57, Black, Creme White)
-
 Database: SQLite (dev) / PostgreSQL (prod)
-
 Authentication: Custom User Model, hashed passwords, CSRF protection
-
 Tools: Git, PlantUML, venv
-
 Features
-User registration & login
-
-CRUD for products, stores, orders
-
-Category-based product classification
-
-Order & order item tracking
-
-EcoScore tracking
-
-Swap listings for products
-
-Notifications system
-
-Responsive UI
-
+- User registration & login
+- CRUD for products, stores, orders
+- Category-based product classification
+- Order & order item tracking
+- EcoScore tracking
+- Swap listings for products
+- Notifications system
+- Responsive UI
 Setup Instructions
-Clone the repo:
+Clone the repo, create and activate virtual environment, install dependencies, apply migrations, create superuser (optional), run development server, and open in browser:
 
-bash
-Copy code
 git clone https://github.com/Shantralee-58/alx-project-nexus.git
 cd alx-project-nexus
-Create and activate virtual environment:
-
-bash
-Copy code
 python -m venv venv
 source venv/Scripts/activate   # Windows
 # OR
 source venv/bin/activate       # macOS/Linux
-Install dependencies:
-
-bash
-Copy code
 pip install -r requirements.txt
-Apply migrations:
-
-bash
-Copy code
 python manage.py migrate
-Create superuser (optional):
-
-bash
-Copy code
-python manage.py createsuperuser
-Run the development server:
-
-bash
-Copy code
+python manage.py createsuperuser  # optional
 python manage.py runserver
-Open http://127.0.0.1:8000/ in browser.
-
-Sustainify - Fully integrated eco-friendly e-commerce platform. 🌱
-
-yaml
-Copy code
+Open in browser: http://127.0.0.1:8000/
 
