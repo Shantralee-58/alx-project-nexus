@@ -1,163 +1,235 @@
-# Project Nexus – E-commerce Backend Documentation
+# Sustainify 🌱
 
-## Project Overview
-
-This repository serves as my final documentation project for the **ALX ProDev Backend Engineering Program**.  
-It highlights my journey and learnings while developing a **fully functional e-commerce backend system**.  
-
-The goal is to create a central hub of knowledge showcasing backend engineering concepts, tools, and best practices.  
-This documentation also serves as a **guide for frontend learners** who will integrate their frontend applications with backend APIs.
+Sustainify is an eco-friendly marketplace and community platform designed to connect users, stores, and products with a focus on sustainability, responsible consumption, and surplus management. The application enables users to buy, sell, swap, and track eco-conscious products while rewarding eco-friendly behaviors with an EcoScore system.
 
 ---
 
-## Key Technologies
+## Features
 
-| Technology        | Purpose |
-|-------------------|---------|
-| Python            | Core backend programming language |
-| Django            | Web framework for building backend logic |
-| Django REST Framework | Building RESTful APIs |
-| PostgreSQL        | Relational database management system |
-| Docker            | Containerization and deployment |
-| Celery + RabbitMQ | Asynchronous background task processing |
-| GitHub Actions    | Continuous integration and deployment (CI/CD) |
-| Swagger/OpenAPI   | API documentation and testing |
+- **User Management**
+  - Custom registration with validation (username, password rules)
+  - Role-based access: User, Store Owner, Admin
+  - Profile and account management
 
----
+- **Stores**
+  - Users can create and manage stores
+  - Stores have location, description, and owner
 
-## Backend Concepts Learned
+- **Products & Categories**
+  - Eco-friendly products can be added to stores
+  - Products can belong to multiple categories
+  - Track surplus items, expiry dates, and eco-category
 
-This project captures key backend engineering concepts I studied during the program:
+- **Orders & OrderItems**
+  - Users can place orders from stores
+  - Order details with items, price, and quantity
 
-- **Database Design**
-  - Designing normalized relational databases.
-  - Creating efficient indexes to optimize queries.
-  - Structuring tables for scalability and growth.
+- **EcoScore**
+  - Users earn scores based on eco-friendly actions
+  - Track details in JSON format
 
-- **Asynchronous Processing**
-  - Implementing background tasks for sending order confirmations and notifications using Celery & RabbitMQ.
+- **SwapListings**
+  - Users can list items for swap
+  - Track desired items and listing status
 
-- **Caching Strategies**
-  - Improving performance with Redis caching for frequently accessed product data.
-
-- **API Design**
-  - RESTful API principles with Django REST Framework.
-  - Proper error handling and secure authentication mechanisms.
-
-- **Security Best Practices**
-  - Input validation to prevent SQL injection and XSS.
-  - Rate limiting to protect APIs against abuse.
-  - Secure authentication and password handling.
+- **Notifications**
+  - Users receive notifications for orders, swaps, and updates
 
 ---
 
-## Challenges & Solutions
+## Project Structure
 
-**Challenge:** Handling peak order volumes without slowing down the API.  
-**Solution:** Implemented asynchronous processing with Celery and RabbitMQ to process high-volume tasks in the background.
+alx-project-nexus/
+├─ ERD/
+│ └─ Sustainify_ERD.puml
+├─ categories/
+│ ├─ migrations/
+│ └─ models.py
+├─ orders/
+│ ├─ migrations/
+│ └─ models.py
+├─ products/
+│ ├─ migrations/
+│ └─ models.py
+├─ sustainify/
+│ ├─ settings.py
+│ ├─ urls.py
+│ └─ wsgi.py
+├─ users/
+│ ├─ migrations/
+│ ├─ models.py
+│ ├─ views.py
+│ ├─ urls.py
+│ └─ forms.py
+├─ venv/
+├─ manage.py
+└─ requirements.txt
 
-**Challenge:** Reducing database query times for product catalog searches.  
-**Solution:** Added indexing to frequently queried fields and implemented Redis caching.
+@startuml Sustainify_ERD
+' -----------------------------
+' Sustainify ERD — Professional Version with Crow’s Foot
+' -----------------------------
+skinparam linetype ortho
+hide circle
+skinparam classAttributeIconSize 0
 
-**Challenge:** Clear documentation for frontend developers.  
-**Solution:** Created a separate `api-endpoints.md` file with all routes and usage examples.
+' Entities
+class User {
+  +id : UUID <<PK>>
+  +email : varchar
+  +username : varchar
+  +password_hash : varchar
+  +is_active : boolean
+  +is_staff : boolean
+  +role : varchar
+  +created_at : timestamptz
+}
 
----
+class Store {
+  +id : UUID <<PK>>
+  +owner_id : UUID <<FK>>
+  +name : varchar
+  +description : text
+  +location_lat : decimal
+  +location_lng : decimal
+  +created_at : timestamptz
+}
 
-## Best Practices & Personal Takeaways
+class Product {
+  +id : UUID <<PK>>
+  +store_id : UUID <<FK>>
+  +name : varchar
+  +sku : varchar
+  +description : text
+  +price_cents : integer
+  +quantity : integer
+  +is_surplus : boolean
+  +expiry_date : date
+  +eco_category : varchar
+  +created_at : timestamptz
+}
 
-- Write **clean, modular, and reusable code** to improve maintainability.
-- Proper **version control** using GitHub is essential for collaboration.
-- Document everything — clear documentation saves time and prevents confusion.
-- Building with scalability in mind ensures future growth and stability.
-- Security should never be an afterthought; it must be designed from the start.
+class Category {
+  +id : UUID <<PK>>
+  +name : varchar
+}
 
----
+class ProductCategory {
+  +id : UUID <<PK>>
+  +product_id : UUID <<FK>>
+  +category_id : UUID <<FK>>
+}
 
-## Collaboration Notes
+class Order {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +store_id : UUID <<FK>>
+  +total_cents : integer
+  +status : varchar
+  +created_at : timestamptz
+}
 
-Although I am working solo, this backend was built with **team collaboration in mind**.  
-If frontend learners were integrating with this system, they would rely on these APIs to:
+class OrderItem {
+  +id : UUID <<PK>>
+  +order_id : UUID <<FK>>
+  +product_id : UUID <<FK>>
+  +price_cents : integer
+  +quantity : integer
+}
 
-- Display products and categories.
-- Manage carts and checkout flows.
-- Handle user registration and authentication.
+class EcoScore {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +score : integer
+  +details : JSON
+}
 
-**Collaboration Platform:**  
+class SwapListing {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +product_id : UUID <<FK>>
+  +desired_items : text
+  +status : varchar
+  +created_at : timestamptz
+}
 
-All collaboration would happen on the dedicated Discord channel `#ProDevProjectNexus`.
+class Notification {
+  +id : UUID <<PK>>
+  +user_id : UUID <<FK>>
+  +type : varchar
+  +payload : JSON
+  +read : boolean
+  +created_at : timestamptz
+}
 
----
+' Relationships with Crow's Foot Notation
+User "1" -- "0..*" Store : owns
+Store "1" -- "0..*" Product : offers
+Product "1" -- "0..*" ProductCategory : classified_as
+Category "1" -- "0..*" ProductCategory : includes
+User "1" -- "0..*" Order : places
+Store "1" -- "0..*" Order : receives
+Order "1" -- "0..*" OrderItem : contains
+Product "1" -- "0..*" OrderItem : sold_as
+User "1" -- "0..*" EcoScore : has
+User "1" -- "0..*" SwapListing : creates
+Product "1" -- "0..*" SwapListing : references
+User "1" -- "0..*" Notification : receives
 
-## System Design
+@enduml
 
-### Entities (ERD):
+Installation
 
-- **Users** – customer accounts and authentication.
-- **Products** – catalog with details like name, description, and price.
-- **Categories** – grouping of similar products.
-- **Orders** – tracks purchase details.
-- **Cart** – manages items before checkout.
-- **Payments** – tracks payment details and statuses.
+Clone the repository
 
-A detailed ERD diagram is provided in the `diagrams/` folder.
-
----
-
-## API Endpoints Reference
-
-For detailed endpoint descriptions, refer to the `docs/api-endpoints.md` file.
-
-| Endpoint            | Method | Description |
-|---------------------|--------|-------------|
-| `/api/products/`    | GET    | Retrieve all products |
-| `/api/products/<id>/` | GET  | Retrieve a single product |
-| `/api/cart/`        | POST   | Add an item to the cart |
-| `/api/cart/`        | GET    | View items in the cart |
-| `/api/orders/`      | POST   | Place an order |
-| `/api/orders/<id>/` | GET    | View order details |
-
----
-
-## Setup Instructions
-
-Follow these steps to run the project locally:
-
-```bash
-# Clone the repository
 git clone https://github.com/Shantralee-58/alx-project-nexus.git
-
-# Navigate to the project folder
 cd alx-project-nexus
 
-# Build and run using Docker
-docker-compose up --build
-```
 
-Once running, access the API at `http://localhost:8000/api/`.
+Create and activate a virtual environment
 
----
+python -m venv venv
+source venv/Scripts/activate      # Windows
+# or
+source venv/bin/activate          # Mac/Linux
 
-## Final Checklist
 
-Before submission, ensure you have completed the following:
+Install dependencies
 
-- [x] GitHub repo named `alx-project-nexus`
-- [x] Structured and well-written `README.md`
-- [x] Proper commit history and messages
-- [x] At least one system design diagram
-- [x] API documentation in a separate file
-- [x] Documented challenges and solutions
+pip install -r requirements.txt
 
----
 
-## Reflection
+Apply migrations
 
-Project Nexus gave me the opportunity to **apply my learning in a practical, real-world scenario**.  
-This project not only solidified my backend engineering skills but also taught me the value of documentation, planning, and scalability in software development.
+python manage.py migrate
 
----
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Create a superuser (admin)
 
+python manage.py createsuperuser
+
+
+Run the development server
+
+python manage.py runserver
+
+
+Access the app
+
+Frontend: http://127.0.0.1:8000/
+
+Admin Panel: http://127.0.0.1:8000/admin/
+
+License
+
+This project is MIT Licensed — see LICENSE for details.
+
+Contact
+
+Developer: Idah Lindiwe Khumalo
+
+Email: lindiwekhumalo833@gmail.com
+
+GitHub: https://github.com/Shantralee-58
+
+LinkedIn: https://www.linkedin.com/in/idah-khumalo-765778159
