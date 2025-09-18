@@ -1,20 +1,21 @@
 from django.db import models
-from users.models import CustomUser
-from products.models import Product
+from django.contrib.auth import get_user_model
+import uuid
+
+User = get_user_model()
 
 class Order(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    store = models.ForeignKey('products.Store', on_delete=models.CASCADE)  # string reference
+    total_cents = models.IntegerField()
+    status = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, default='Pending')  # Pending, Completed, Cancelled
 
-    def save(self, *args, **kwargs):
-        # Automatically calculate total price
-        self.total_price = self.product.price * self.quantity
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"Order {self.id} - {self.product.name} x {self.quantity}"
+class OrderItem(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE)  # string reference
+    price_cents = models.IntegerField()
+    quantity = models.IntegerField()
 
