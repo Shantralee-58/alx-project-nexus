@@ -1,0 +1,58 @@
+[
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "name": "Reusable Water Bottle",
+      "description": "Durable and eco-friendly water bottle made from stainless steel.",
+      "price": "150.00",
+      "stock": 100,
+      "created_at": "2025-09-18T14:00:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "name": "Bamboo Cutlery Set",
+      "description": "Portable bamboo cutlery set for a zero-waste lifestyle.",
+      "price": "80.00",
+      "stock": 200,
+      "created_at": "2025-09-18T14:05:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "name": "Reusable Shopping Bag",
+      "description": "Foldable, durable shopping bag to replace single-use plastic.",
+      "price": "50.00",
+      "stock": 300,
+      "created_at": "2025-09-18T14:10:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "name": "Organic Dish Soap",
+      "description": "Natural dish soap free from harsh chemicals, safe for the environment.",
+      "price": "75.00",
+      "stock": 150,
+      "created_at": "2025-09-18T14:15:00Z"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "name": "Metal Straw Set",
+      "description": "Pack of stainless steel straws with cleaning brush.",
+      "price": "60.00",
+      "stock": 250,
+      "created_at": "2025-09-18T14:20:00Z"
+    }
+  }
+]
+
