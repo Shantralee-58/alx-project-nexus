@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sustainable Solutions{% endblock %}
+
+{% block content %}
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Sustainable Solutions</h1>
+            <p>Building a greener future for all</p>
+            
+            <a href="{% url 'products:product_list' %}" class="btn btn-primary btn-explore">Explore Products</a>
+        </div>
+    </section>
+
+    {% endblock %}

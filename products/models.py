@@ -1,40 +1,23 @@
-import uuid
 from django.db import models
-from django.conf import settings
-
-class Category(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(default="No description")
-
-    def __str__(self):
-        return self.name
-
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(default="No description")
+    image = models.CharField(max_length=100) 
+    name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    stock = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        default=1  # temporary default id
-    )
+    description = models.TextField()
+    is_eco_friendly = models.BooleanField(default=True)
+    category = models.CharField(max_length=50, default='General')
 
     def __str__(self):
         return self.name
 
-User = settings.AUTH_USER_MODEL
-
 class Store(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    location_lat = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    location_lng = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=20)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
     def __str__(self):
         return self.name

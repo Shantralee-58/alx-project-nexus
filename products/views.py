@@ -1,14 +1,15 @@
-from rest_framework import generics
-from .models import Product
-from .serializers import ProductSerializer
+from django.shortcuts import render
+from .models import Product 
 
-# List all products OR create a new product
-class ProductListCreateView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+def product_list_view(request):
+    # Fetch ALL products from the PostgreSQL database
+    products_queryset = Product.objects.all().order_by('name') 
 
-# Retrieve, update, or delete a single product
-class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
+    context = {
+        'products': products_queryset,
+        # Static data for sidebar filters (for template rendering)
+        'categories': ['Eco Services', 'Eco Gadgets', 'Sustainable Clothing', 'Organic Food', 'Reusable Items'],
+        'eco_labels': ['Organic', 'Recycled', 'Vegan', 'Fair Trade']
+    }
+    
+    return render(request, 'products/product_list.html', context)
