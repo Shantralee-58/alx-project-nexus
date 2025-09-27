@@ -1,28 +1,42 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Find Sustainable Stores - Sustainify{% endblock %}
+{% block title %}Store Locations{% endblock %}
 
 {% block content %}
-
-    <div class="page-background-wrapper">
+<div class="main-content">
+    <!-- The light-card-content wrapper is crucial for the green background -->
+    <div class="light-card-content"> 
+        <h1 class="main-heading">Find Sustainable Stores Near You</h1>
+        
+        <!-- Search bar layout matching the mockup -->
+        <div class="search-bar-container">
+            <input type="text" placeholder="Search by city or zip code" class="search-input">
+            <!-- Font Awesome icon for search -->
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <!-- Main two-column layout for map and store list -->
         <div class="stores-container">
-            
-            <div class="store-header">
-                <h1>Find Sustainable Stores Near You</h1>
-                </div>
+            <!-- Map Section (Left Column) -->
+            <div class="map-section">
+                <!-- Placeholder for the Map Image, using a static image -->
+                <img src="{% static 'images/map_placeholder.png' %}" alt="Map of Store Locations" class="map-image">
+            </div>
 
-            <div class="store-content-layout">
-                <div class="map-placeholder">
-                    <img src="{% static 'images/map_placeholder.png' %}" alt="Map of Store Locations">
-                </div>
-
-                <div class="store-locations-list">
-                    <h2>Store Locations:</h2>
-                    <p>No stores are currently listed in the database.</p>
-                </div>
+            <!-- Locations List (Right Column) -->
+            <div class="locations-section">
+                <h2 class="locations-heading">Store Locations:</h2>
+                {% for store in stores %}
+                    <div class="store-location-item">
+                        <h3 class="store-name">{{ store.name }}</h3>
+                        <p class="store-address">{{ store.address }}, {{ store.postal_code }}</p>
+                    </div>
+                {% empty %}
+                    <p class="no-stores-message">No stores are currently listed in the database.</p>
+                {% endfor %}
             </div>
         </div>
     </div>
-    
-{% endblock content %}
+</div>
+{% endblock %}
