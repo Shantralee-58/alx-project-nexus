@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Sustainify{% endblock %}
+
+{% block content %}
+    <!-- Reuses the same background wrapper and container class for consistent styling -->
+    <div class="page-background-wrapper">
+        <div class="orders-container about-us-container">
+            
+            <!-- Main Titles -->
+            <h1 class="about-us-title">About Us</h1>
+            <p class="about-us-subtitle">Learn more about our mission and values</p>
+            
+            <div class="mission-values-grid">
+                
+                <!-- Column 1: Our Values -->
+                <div class="value-column">
+                    <h2 class="column-header">Our Values</h2>
+                    <p class="column-content">
+                        At Sustainify, we are guided by our core values: sustainability to 
+                        protect our planet, transparency to build trust, community to empower 
+                        people and businesses, accessibility to make eco-friendly living easy 
+                        for everyone, integrity to ensure ethical practices, and innovation to 
+                        create smarter, greener solutions.
+                    </p>
+                </div>
+                
+                <!-- Column 2: Our Mission -->
+                <div class="mission-column">
+                    <h2 class="column-header">Our Mission</h2>
+                    <p class="column-content">
+                        At Sustainify, our mission is to accelerate the transition to 
+                        sustainable consumption by empowering consumers and small businesses 
+                        with a trusted platform for eco-friendly products and services. 
+                        We make it simple to discover verified sustainable options, track 
+                        environmental impact, and support vendors who prioritize people and the planet.
+                    </p>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
+

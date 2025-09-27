@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    path('', views.order_list, name='order_list'),
-]
+app_name = 'orders'
 
+urlpatterns = [
+    # Maps /orders/ to the order_list_view
+    path('', views.order_list_view, name='order_list'),
+]

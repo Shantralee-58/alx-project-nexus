@@ -1,17 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Orders</title>
-</head>
-<body>
-    <h1>All Orders</h1>
-    <ul>
-        {% for order in orders %}
-            <li>Order #{{ order.id }} - User: {{ order.user }} - Store: {{ order.store }} - Total: {{ order.total_cents }}</li>
-        {% empty %}
-            <li>No orders found.</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
 
+{% block title %}Your Orders - Sustainify{% endblock %}
+
+{% block content %}
+    <div class="page-background-wrapper">
+        <div class="orders-container">
+            
+            <h1 class="orders-page-title">Orders</h1>
+            <p class="orders-page-subtitle">Track the status of your recent orders</p>
+            
+            {% if orders %}
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total (R)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>#{{ order.id|stringformat:"06d" }}</td> <td>{{ order.order_date|date:"d M Y" }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.total_price|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-orders-message">You haven't placed any orders yet.</p>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock content %}

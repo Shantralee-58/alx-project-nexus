@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Find Sustainable Stores - Sustainify{% endblock %}
+
+{% block content %}
+
+    <div class="page-background-wrapper">
+        <div class="stores-container">
+            
+            <div class="store-header">
+                <h1>Find Sustainable Stores Near You</h1>
+                </div>
+
+            <div class="store-content-layout">
+                <div class="map-placeholder">
+                    <img src="{% static 'images/map_placeholder.png' %}" alt="Map of Store Locations">
+                </div>
+
+                <div class="store-locations-list">
+                    <h2>Store Locations:</h2>
+                    <p>No stores are currently listed in the database.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}
