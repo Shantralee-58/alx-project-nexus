@@ -5,16 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sustainify | Sustainable Solutions{% endblock %}</title>
-    
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
+
+    <!-- Using the user's preferred Font Awesome link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
+    <!-- Messages Display (Crucial for Contact Form success/error) -->
+    <div class="messages-container">
+        {% if messages %}
+            {% for message in messages %}
+                <!-- Note: You will need CSS in style.css for .message-box and .success/.error tags -->
+                <div class="message-box message-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
     <header>
         <div class="navbar">
-            
+
             <div class="logo-container">
                 <a href="{% url 'home:home_page' %}">
                     <img src="{% static 'images/sustainify-logo.png' %}" alt="Sustainify Logo" class="logo-image">
@@ -22,10 +35,10 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{% url 'home:home_page' %}">Home</a></li>
+                <li><a href="{% url 'home:home_page' %}">HOME</a></li>
                 <li><a href="{% url 'products:product_list' %}">PRODUCTS</a></li>
-		<li><a href="{% url 'stores:store_list' %}">STORES</a></li>
-                <li><a href="{% url 'orders:order_list' %}">ORDERS</a></li>
+                <li><a href="{% url 'stores:store_list' %}">STORES</a></li>
+                <!-- REMOVED STATIC ORDERS LINK: It will be added dynamically under 'user-icons' -->
                 <li><a href="{% url 'about:about_us' %}">ABOUT US</a></li>
                 <li><a href="{% url 'about:contact_us' %}">CONTACT</a></li>
             </ul>
@@ -35,14 +48,29 @@
                     <input type="text" placeholder="What are you looking for?...">
                     <button>Search</button>
                 </div>
+                
+                <!-- DYNAMIC USER ICONS/AUTH LINKS -->
                 <div class="user-icons">
-                    <a href="#"><i class="fas fa-user"></i> Account</a>
-                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                    {% if user.is_authenticated %}
+                        <!-- Authenticated User Links -->
+                        <span class="welcome-text">Hello, {{ user.username }}</span>
+                        <a href="{% url 'orders:order_list' %}" title="My Orders"><i class="fas fa-shopping-bag"></i> Orders</a>
+                        <a href="{% url 'accounts:logout' %}" title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    {% else %}
+                        <!-- Guest Links -->
+                        <a href="{% url 'accounts:register' %}" title="Register"><i class="fas fa-user-plus"></i> Register</a>
+                        <a href="{% url 'accounts:login' %}" title="Login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    {% endif %}
+                    
                     <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                    
                 </div>
+                <!-- END DYNAMIC USER ICONS/AUTH LINKS -->
+
             </div>
         </div>
-    </header> 
+    </header>
 
     <main>
         {% block content %}
@@ -51,11 +79,12 @@
 
     <footer>
         <div class="footer-content">
-            
+
             <div class="footer-column">
                 <h4>Sustainify</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
+                    <!-- Updated with actual URL names where possible -->
+                    <li><a href="{% url 'about:about_us' %}">About Us</a></li>
                     <li><a href="#">Careers</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Sustainability Mission</a></li>
@@ -68,16 +97,17 @@
                     <li><a href="#">Help Center</a></li>
                     <li><a href="#">FAQs</a></li>
                     <li><a href="#">Shipping & Returns</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <!-- Updated with actual URL name -->
+                    <li><a href="{% url 'about:contact_us' %}">Contact Us</a></li>
                 </ul>
             </div>
 
             <div class="footer-column">
                 <h4>Shop</h4>
                 <ul>
-                    <li><a href="{% url 'products:product_list' %}">All Products</a></li> 
+                    <li><a href="{% url 'products:product_list' %}">All Products</a></li>
                     <li><a href="#">Eco-Friendly Deals</a></li>
-                    <li><a href="#">Featured Stores</a></li>
+                    <li><a href="{% url 'stores:store_list' %}">Featured Stores</a></li>
                     <li><a href="#">Gift Cards</a></li>
                 </ul>
             </div>
@@ -90,8 +120,10 @@
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
+            <p>&copy; 2025 Sustainify. All rights reserved.</p>
         </div>
     </footer>
 
 </body>
 </html>
+

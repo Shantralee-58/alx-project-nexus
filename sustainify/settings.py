@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import os
 from pathlib import Path
+import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
+    'rest_framework_simplejwt',
     'products',
     'categories',
     'orders',
@@ -66,7 +69,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # The 'templates' folder at the project root is added to DIRS list
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,6 +98,34 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+
+    # Set Default Authentication Class to JWT
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # Keep session auth for browsable API
+    ),
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+}
+
+SIMPLE_JWT = {
+    # Tokens are valid for 5 minutes (standard security practice)
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    # Refresh tokens are valid for 1 day
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "ALGORITHM": "HS256",
+    # Defines the field used for authentication (username or email)
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -138,9 +169,25 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = 'accounts/login/'
 
-LOGIN_REDIRECT_URL = 'home:home_page' 
+LOGIN_REDIRECT_URL = 'home:home_page'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# -------------------------------------------------------------
+# EMAIL CONFIGURATION FOR CONTACT FORM (NEW ADDITIONS)
+# -------------------------------------------------------------
+
+# 1. Use a console backend for development to print emails to the terminal
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
+# 2. The email address that will be used as the sender for contact form messages
+# We use an environment variable (or a default if it's not set)
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'contact@sustainify.com')
+
+# 3. The internal email address that will receive the contact form submissions
+CONTACT_FORM_RECIPIENT = os.getenv('CONTACT_FORM_RECIPIENT', 'support@sustainify.com')
+
