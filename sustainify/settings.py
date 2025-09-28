@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v6xg$5yq$lb#q&esrwgy3p9#%(_htn=ox*zyv1&fklti7&-ai!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['idah58.pythonanywhere.com', '127.0.0.1']
 
@@ -163,11 +163,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# 1. Location where Django looks for per-app static files during development.
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 ]
+
+# 2. The single, absolute path where all static files are collected for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 LOGIN_URL = 'accounts/login/'
 
