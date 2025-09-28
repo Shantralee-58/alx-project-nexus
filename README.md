@@ -132,6 +132,34 @@ The platform exposes a secure RESTful API using Django Rest Framework. All API i
 | `/api/orders/` | GET | List the authenticated user's order history. | **Required** |
 | `/api/auth/token/login/` | POST | Obtain an authentication token (using Django auth tokens). | N/A |
 
+## 📸 Visual Documentation
+
+### Frontend Pages and Features
+
+| Page / Feature | View |
+| :--- | :--- |
+| **Homepage & Navigation** | ![Home Page](screenshots/home.png) |
+| **User Login Screen** | ![Login Screen](screenshots/login.png) |
+| **Product Listings** | ![Product Catalog](screenshots/products.png) |
+| **Store Locations** | ![Stores Page](screenshots/stores.png) |
+| **About Us Page** | ![About Us](screenshots/about.png) |
+| **User Orders View** | ![User Orders History](screenshots/orders.png) |
+| **Contact Form** | ![Contact Page](screenshots/contact.png) |
+
+### Backend and API Views
+
+| View | Screenshot |
+| :--- | :--- |
+| **Django Admin Interface** | ![Django Admin Home](screenshots/BE_DjangoAdmin.png) |
+| **Admin: User Management** | ![Admin Users](screenshots/BE_Users.png) |
+| **Admin: Category Management** | ![Admin Category](screenshots/BE_Category.png) |
+| **Admin: Product List View** | ![Admin Product List](screenshots/BE_ProductList.png) |
+| **DRF API Browsable Interface** | ![DRF Rest Framework](screenshots/BE_RestFramework.png) |
+| **DRF API: Orders Endpoint** | ![DRF Orders](screenshots/BE_Orders.png) |
+| **DRF API: Products Endpoint** | ![DRF Products](screenshots/BE_Products.png) |
+
+***Note:** All documentation images are committed to the appropriate folders (`screenshots/` and `ERD/`) within the project root.*
+
 ### Placing an Order (Example POST to `/api/orders/`)
 
 Orders are placed by providing a list of `items` with `product_id` and `quantity`.
