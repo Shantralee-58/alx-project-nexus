@@ -23,6 +23,7 @@ Sustainify is an eco-conscious **full-stack** e-commerce **and service** platfor
 | ----- | ----- | ----- |
 | **Backend Framework** | **Django 5.x** (Python 3.12) | Provides ORM, routing, and security. |
 | **API** | **Django REST Framework (DRF)** | Used for secure, authenticated order placement and product listing. |
+| **Authentication** | **JWT (JSON Web Tokens)** | Standard for secure, stateless API authentication. |
 | **Database** | **PostgreSQL** (Development) | Default database for local testing. |
 | **Frontend** | HTML, CSS (Custom), JavaScript | Focus on clean, responsive UI. |
 | **Authentication** | Django's built-in Auth system | Handles user registration, login, and password management. |
