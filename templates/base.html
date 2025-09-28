@@ -97,7 +97,8 @@
                         <!-- Unauthenticated User Links -->
                         <!-- UPDATED: Using un-namespaced 'login' and 'register' URLs -->
                         <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
-                        <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
+                        <!-- FIX: Temporarily point 'register' to 'login' until the users app is created and registered -->
+                        <a href="{% url 'login' %}"><i class="fas fa-user-plus"></i> Register</a>
                     {% endif %}
                     <a href="#"><i class="fas fa-question-circle"></i> Help</a>
                     <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
