@@ -164,12 +164,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # 1. Location where Django looks for per-app static files during development.
-STATICFILES_DIRS = [
+STATIC_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
 # 2. The single, absolute path where all static files are collected for deployment.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 LOGIN_URL = 'accounts/login/'
