@@ -89,12 +89,8 @@ WSGI_APPLICATION = 'sustainify.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sustainify_db',
-        'USER': 'sustainify_user',
-        'PASSWORD': 'sustainify123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -164,12 +160,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # 1. Location where Django looks for per-app static files during development.
-STATIC_DIRS = [
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
 # 2. The single, absolute path where all static files are collected for deployment.
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 LOGIN_URL = 'accounts/login/'
